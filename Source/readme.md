@@ -5,6 +5,8 @@
 - Power supply 5v 5a
 - Amazon Alexa echo dot or similar
 
+![alt text]https://github.com/vniclos/Alexa-Esp32-8-relays/blob/main/images/hardware.jpg?raw=true)
+
 
 # Software dependencies
 - lib_deps = 
