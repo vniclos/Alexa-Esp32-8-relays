@@ -8,7 +8,7 @@ Alexa join esp32 and 8 relays modules simultanead with web server
 
 # Before compile change file mainDefines.h 
 
-You need change wifi connection values and if
+You need change wifi connection values 
 ```c
 // WIFI AJUST VALUES TO YOUR REQUERIMENTS
 const char *g_NetWsWifiSsid = "PUT YOUR WIFI SSIID";
@@ -21,7 +21,11 @@ IPAddress g_NetWsIpDNS1(8, 8, 8, 8); // optional
 IPAddress g_NetWSIpDNS2(8, 8, 4, 4); // optional
 long g_NetWsWifiIntervalPrevious = 0;
 long g_NetWsWifiIntervalLapse = 30000;
-//
+```
+ And change Alexa names to join relays to command
+ 
+ in this sample if you seay "Alexa! put on belen 1" the relay 0 will be changed to on
+```c
 //--------------------- ALEXA AJUST NAME TO YOUR REQUERIMENTS
 // THIS IS THE NAMES TO SAY alexa command
 const char g_AlexaDeviceName_Belen1[] = "belen 1";   // CHANGE TO PREFERENCED NAME FOR RELAY  0
@@ -35,4 +39,3 @@ const char g_AlexaDeviceName_Belen8[] = "belen 8"; // CHANGE TO PREFERENCED NAME
 
 ```c
 
-![alt text](https://github.com/vniclos/Alexa-Esp32-8-relays/blob/main/images/web_belen..jpg?raw=true)
