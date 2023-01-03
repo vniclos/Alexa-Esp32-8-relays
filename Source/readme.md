@@ -1,5 +1,7 @@
+# Think that you need know to build and recompile
 
-# Hardware
+
+## Hardware
 - Esp32 Dev kit
 - four relays kit
 - Power supply 5v 5a
@@ -8,27 +10,27 @@
 ![alt text](https://github.com/vniclos/Alexa-Esp32-8-relays/blob/main/images/hardware.jpg?raw=true)
 
 
-# Software dependencies
+## Software dependencies
 - lib_deps = 
 - ESP Async WebServer@^1.2.3
 - FauxmoESP@^3.4
 - ESPAsyncTCP@^1.2.2
 
-# Development enviroment
+## Development enviroment
 - Visual studio code
 - Arduino IDE with Expresif dependencies
 - Platformio
 
-# User enviroment
+## User enviroment
 
-# Alexa 
+### Alexa 
 voice commands
 - Alexa! [enciende / apaga] rele 1
 - Alexa! [enciende / apaga] rele 2
 - ...
 - Alexa! [enciende / apaga] rele 8
 
-## Web site
+### Web site
  Note: on web site you can set relay flashing fixed interval , and randon flashing interval
 # User enviroment web site
 
@@ -36,7 +38,7 @@ voice commands
 ![alt text](https://github.com/vniclos/Alexa-Esp32-8-relays/blob/main/images/web_belen..jpg?raw=true)
 
 
-# Before compile change file mainDefines.h 
+## Before compile change file mainDefines.h 
 
 You need change wifi connection values 
 ```c
