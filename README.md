@@ -13,7 +13,7 @@ You need change wifi connection values
 // WIFI AJUST VALUES TO YOUR REQUERIMENTS
 const char *g_NetWsWifiSsid = "PUT YOUR WIFI SSIID";
 const char *g_NetWsWifiPwd = "PUT YOU WIFI PASSWORD";
-
+// STATIC IP VALUES
 IPAddress g_NetWsIPAddresslocal_IP(192, 168, 2, 41); // CHANGE TO ASIGN VALID IP FOR YOUR NETWORK
 IPAddress g_NetWsIpGateway(192, 168, 2, 1); // CHANGE TO ASIGN VALID IP GATEWAY IN  YOUR NETWORK (your router)
 IPAddress g_NetWsIpSubnet(255, 255, 255, 0);
