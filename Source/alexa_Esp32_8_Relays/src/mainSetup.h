@@ -148,7 +148,7 @@ void fncSetupSoftWebSrv()
     Serial.print(id);
     Serial.println(p_value);
 
-    szHtml = "Configurado: Rele ";
+    szHtml = "Config: Relay ";
     szHtml += String(id+1)+ " ";
     szHtml += String(g_Relays[id].pin())+ " ";
     if (id>-1 && id<g_RelaysCount)
@@ -156,22 +156,22 @@ void fncSetupSoftWebSrv()
         if (p_value == "0")
         {
             g_Relays[id].m_programation.setupFixed_OFF();
-            szHtml += " apagado siempre";
+            szHtml += " Allways on";
         }
         if (p_value == "1")
         {
             g_Relays[id].m_programation.setupFixed_ON();
-            szHtml += " Encendido siempre";
+            szHtml += " Always off";
         }
         if (p_value == "2")
         {
             g_Relays[id].m_programation.setupIntevalFixed(1000);
-            szHtml += " Flash duracion fija";
+            szHtml += " Flashing fix interval";
         }
         if (p_value == "3")
         {
             g_Relays[id].m_programation.setupIntervalRandon(10000, 30000);
-            szHtml += " Flash duracion al azar";
+            szHtml += " Flash randon interval";
         }
     }
                         request->send(200, "text/plain", szHtml);
@@ -228,23 +228,23 @@ void fncSetupSoftFauxmoAlexa()
     g_NetFauxmoAlexa.createServer(false);
     g_NetFauxmoAlexa.setPort(80); // This is required for gen3 devices
     g_NetFauxmoAlexa.enable(true);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Belen1);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Belen2);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Belen3);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Belen4);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Belen5);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Belen6);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Belen7);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Belen8);
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay1);
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay2);
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay3);
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay4);
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay5);
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay6);
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay7);
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay8);
 
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Belen1, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Belen2, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Belen3, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Belen4, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Belen5, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Belen6, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Belen7, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Belen8, true, 255);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay1, true, 255);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay2, true, 255);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay3, true, 255);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay4, true, 255);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay5, true, 255);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay6, true, 255);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay7, true, 255);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay8, true, 255);
 
     g_NetFauxmoAlexa.onSetState([](unsigned char device_id, const char *device_name, bool state, unsigned char value)
                                 {
@@ -295,35 +295,35 @@ void fncSetupSoftFauxmoAlexa()
                                         relayId = 7;
                                     }
 
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Belen1) == 0))
+                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay1) == 0))
                                     {
                                         relayId = 0;
                                     }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Belen2) == 0))
+                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay2) == 0))
                                     {
                                         relayId = 1;
                                     }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Belen3) == 0))
+                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay3) == 0))
                                     {
                                         relayId = 2;
                                     }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Belen4) == 0))
+                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay4) == 0))
                                     {
                                         relayId = 3;
                                     }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Belen5) == 0))
+                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay5) == 0))
                                     {
                                         relayId = 4;
                                     }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Belen6) == 0))
+                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay6) == 0))
                                     {
                                         relayId = 5;
                                     }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Belen7) == 0))
+                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay7) == 0))
                                     {
                                         relayId = 6;
                                     }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Belen8) == 0))
+                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay8) == 0))
                                     {
                                         relayId = 7;
                                     }
