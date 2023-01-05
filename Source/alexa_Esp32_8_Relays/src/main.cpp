@@ -5,12 +5,15 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include "mainDefines.h"
+#include "mainRingLed.h"
 #include "mainSetup.h"
 
 void setup()
 {
   fncSetupHardware();
   fncSetupSoft();
+  fncSetupMultiCoreTask();
+  // put your setup code here, to run once:
 }
 
 //---------------------------------------------------------
@@ -20,7 +23,7 @@ void g_TaskCore_0_LoopAlexa(void *pvParameters)
 {
 #ifdef DEBUG
   Serial.println("");
-  Serial.print("g_TaskCore_0_LoopAlexa running on core ");
+  Serial.print("g_TaskCore_0_Loop running on core ");
   g_TaskCore_0_Loop
       Serial.println(xPortGetCoreID());
   Serial.println("");
@@ -44,7 +47,22 @@ void g_TaskCore_0_LoopAlexa(void *pvParameters)
     }
   }
 }
+//----------------------------------------------------------
 
+void g_TaskCore_1_LoopRingLed(void *pvParameters)
+{
+#ifdef DEBUG
+  Serial.println("");
+  Serial.print("g_TaskCore_1_LoopRingLed running on core ");
+  Serial.println(xPortGetCoreID());
+#endif
+  g_LedsRing.begin();
+  for (;;)
+  {
+    fncLedsRingIdleChristmas();
+    vTaskDelay(g_LedsRingFadeDelayLoop / portTICK_RATE_MS);
+  }
+}
 void g_TaskCore_1_LoopRelays(void *pvParameters)
 {
 

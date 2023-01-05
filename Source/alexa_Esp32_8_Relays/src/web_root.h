@@ -14,17 +14,17 @@ const char g_HTML_Web_root[] PROGMEM = R"=====(
 <div id="divbody">
 <div class="row">
 	<div class="column">
-		<img  style=" width:120px; "src='/svg.svg' alt="Alexa ESP32 four relays">
+		<img  style=" width:120px; "src='/svg.svg' alt="Logo">
 	</div>
 	<div class="column" >
-			<spam class="title">Alexa  four relays
-			<br/><spam class="titlesub">Esp32 four relays controled by Alexa and Web</spam></spam>
+			<spam class="title">Alexa eight relays
+			<br/><spam class="titlesub">Alexa and web managging  eight relays. (ESP32 and 8 relays module)</spam></spam>
 	</div>
   <div class="clear"></div>
 </div>
 
  <fieldset>
-   <legend>relay 1:</legend>
+   <legend>Relay 1:</legend>
   <br/>
   <input type="button" Class="button" onClick="jsCmd(0,0,'idMsg0')" value ="Off"/>
   <input type="button" Class="button" onClick="jsCmd(0,1,'idMsg0')" value ="ON"/>
@@ -35,7 +35,7 @@ const char g_HTML_Web_root[] PROGMEM = R"=====(
 </fieldset>
 
  <fieldset>
-<legend>relay 2</legend>
+<legend>Relay 2</legend>
   <br/>
   <input type="button" Class="button" onClick="jsCmd(1,0,'idMsg1')" value ="Off"/>
   <input type="button" Class="button" onClick="jsCmd(1,1,'idMsg1')" value ="ON"/>
@@ -45,7 +45,7 @@ const char g_HTML_Web_root[] PROGMEM = R"=====(
   <br/><span id="idMsg1">.</span>
   </fieldset>
  <fieldset>
-<legend>relay 3</legend>
+<legend>Relay 3</legend>
   <br/>
   <input type="button" Class="button" onClick="jsCmd(2,0,'idMsg2')" value ="Off"/>
   <input type="button" Class="button" onClick="jsCmd(2,1,'idMsg2')" value ="ON"/>
@@ -56,7 +56,7 @@ const char g_HTML_Web_root[] PROGMEM = R"=====(
 </fieldset>
  <fieldset>
 
-<legend>relay 4</legend>
+<legend>Relay 4</legend>
   <br/>
   <input type="button" Class="button" onClick="jsCmd(3,0,'idMsg3')" value ="Off"/>
   <input type="button" Class="button" onClick="jsCmd(3,1,'idMsg3')" value ="ON"/>
@@ -66,7 +66,7 @@ const char g_HTML_Web_root[] PROGMEM = R"=====(
   <br/><span id="idMsg3">.</span>
 </fieldset>
  <fieldset>
-<legend>relay 5</legend>
+<legend>Relay 5</legend>
   <br/>
   <input type="button" Class="button" onClick="jsCmd(4,0,'idMsg4')" value ="Off"/>
   <input type="button" Class="button" onClick="jsCmd(4,1,'idMsg4')" value ="ON"/>
@@ -86,7 +86,7 @@ const char g_HTML_Web_root[] PROGMEM = R"=====(
   <br/><span id="idMsg5">.</span>
 </fieldset>
  <fieldset>
-<legend>relay 7</legend>
+<legend>Relay 7</legend>
   <br/>
   <input type="button" Class="button" onClick="jsCmd(6,0,'idMsg6')" value ="Off"/>
   <input type="button" Class="button" onClick="jsCmd(6,1,'idMsg6')" value ="ON"/>
@@ -96,7 +96,7 @@ const char g_HTML_Web_root[] PROGMEM = R"=====(
   <br/><span id="idMsg6">.</span>
 </fieldset>
  <fieldset>
-<legend>4: relay 8</legend>
+<legend>Relay 8</legend>
   <br/>
   <input type="button" Class="button" onClick="jsCmd(7,0,'idMsg7')" value ="Off"/>
   <input type="button" Class="button" onClick="jsCmd(7,1,'idMsg7')" value ="ON"/>

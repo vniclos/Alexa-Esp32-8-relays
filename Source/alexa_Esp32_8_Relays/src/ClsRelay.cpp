@@ -18,7 +18,7 @@ void ClsRelay::attach(uint8_t id, uint8_t pin, String name)
     m_id = id;
     m_pin = pin;
 
-    m_name = name;
+    m_Name = name;
     pinMode(m_pin, OUTPUT);
     digitalWrite(m_pin, RELAY_OFF);
     m_programation.setPinRelay(m_pin);
@@ -33,6 +33,3 @@ void ClsRelay::loop()
    
     m_programation.CalculateNewStatus();
 }
-  uint8_t ClsRelay::pin(){return m_pin;}
-    String ClsRelay::name(){return m_name;}
-     void ClsRelay::name(String name){m_name=name;}

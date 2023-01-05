@@ -11,34 +11,12 @@ void fncSetupHardwareRelays()
 {
     for (uint8_t i = 0; i < g_RelaysCount; i++)
     {
-        Serial.print("Relay ");
-        Serial.print(i);
-        Serial.print(" pin = ");
-        Serial.print(g_pinRelays[i]);
         g_Relays[i].attach(i, g_pinRelays[i], "No id");
-        Serial.println("-------------------------------");
     }
-    g_Relays[0].m_programation.setupFixed_OFF();
-    g_Relays[1].m_programation.setupFixed_OFF();
+    g_Relays[0].m_programation.setupFixed_ON();
+    g_Relays[1].m_programation.setupFixed_ON();
     g_Relays[2].m_programation.setupFixed_OFF();
     g_Relays[3].m_programation.setupFixed_OFF();
-    g_Relays[4].m_programation.setupFixed_OFF();
-    g_Relays[5].m_programation.setupFixed_OFF();
-    g_Relays[6].m_programation.setupFixed_OFF();
-    g_Relays[7].m_programation.setupFixed_OFF();
-    // g_Relays[4].m_programation.setupIntevalFixed(1000);
-    // g_Relays[5].m_programation.setupIntevalFixed(2000);
-    // g_Relays[6].m_programation.setupIntervalRandon(2000, 4500);
-    // g_Relays[7].m_programation.setupIntervalRandon(5000, 20000);
-    /*
-    g_Relays[1].m_programation.setupFixed_ON();
-    g_Relays[2].m_programation.setupIntevalFixed(1000);
-    g_Relays[3].m_programation.setupIntevalFixed(1000);
-    g_Relays[4].m_programation.setupIntevalFixed(1000);
-    g_Relays[5].m_programation.setupIntervalRandon(1000, 5000);
-    g_Relays[6].m_programation.setupIntervalRandon(1500, 8000);
-    g_Relays[7].m_programation.setupIntervalRandon(2500, 10000);
-    */
 }
 void fncSetupHardware()
 {
@@ -122,7 +100,11 @@ void fncSetupSoftWebSrv()
                         fncBlinckOn();  
                         request->send(200, "text/plain", g_HTML_Web_root);
                         fncBlinckOff(); });
-
+    g_NetWebServer.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
+                      {
+                       fncBlinckOn();  
+                       request->send(200,  "image/x-icon", g_HTML_Web_favicon);  
+                       fncBlinckOff(); });
     g_NetWebServer.on("/cmd", HTTP_GET, [](AsyncWebServerRequest *request)
                       {
                         fncBlinckOn();  
@@ -148,32 +130,33 @@ void fncSetupSoftWebSrv()
     Serial.print(id);
     Serial.println(p_value);
 
-    szHtml = "Config: Relay ";
+    szHtml = "Set: Rele ";
     szHtml += String(id+1)+ " ";
-    szHtml += String(g_Relays[id].pin())+ " ";
     if (id>-1 && id<g_RelaysCount)
     {
         if (p_value == "0")
         {
             g_Relays[id].m_programation.setupFixed_OFF();
-            szHtml += " Allways on";
+            szHtml += " always OFF";
         }
         if (p_value == "1")
         {
             g_Relays[id].m_programation.setupFixed_ON();
-            szHtml += " Always off";
+            szHtml += " Always ON";
         }
         if (p_value == "2")
         {
             g_Relays[id].m_programation.setupIntevalFixed(1000);
-            szHtml += " Flashing fix interval";
+            szHtml += " Flashing fixed interval";
         }
         if (p_value == "3")
         {
             g_Relays[id].m_programation.setupIntervalRandon(10000, 30000);
-            szHtml += " Flash randon interval";
+            szHtml += " Flashing randon interval";
         }
     }
+
+
                         request->send(200, "text/plain", szHtml);
                         fncBlinckOff(); });
     g_NetWebServer.on("/js.js", HTTP_GET, [](AsyncWebServerRequest *request)
@@ -191,13 +174,6 @@ void fncSetupSoftWebSrv()
                        fncBlinckOn();  
                        request->send(200, "image/svg+xml", g_HTML_Web_SVG);  
                        fncBlinckOff(); });
-
-    g_NetWebServer.on("/favicon.ico", HTTP_GET, [](AsyncWebServerRequest *request)
-                      {
-                       fncBlinckOn();  
-                       request->send(200,  "image/x-icon", g_HTML_Web_favicon);  
-                       fncBlinckOff(); });
-
     g_NetWebServer.on("/cmd", HTTP_GET, [](AsyncWebServerRequest *request)
                       {
                        fncBlinckOn();  
@@ -228,24 +204,11 @@ void fncSetupSoftFauxmoAlexa()
     g_NetFauxmoAlexa.createServer(false);
     g_NetFauxmoAlexa.setPort(80); // This is required for gen3 devices
     g_NetFauxmoAlexa.enable(true);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay1);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay2);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay3);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay4);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay5);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay6);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay7);
-    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceName_Relay8);
-
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay1, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay2, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay3, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay4, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay5, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay6, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay7, true, 255);
-    g_NetFauxmoAlexa.setState(g_AlexaDeviceName_Relay8, true, 255);
-
+    for (int i = 0; i < g_RelaysCount; i++)
+    {
+        g_NetFauxmoAlexa.addDevice(g_AlexaDeviceNames[i]);
+        g_NetFauxmoAlexa.setState(g_AlexaDeviceNames[i], false, 128);
+    }
     g_NetFauxmoAlexa.onSetState([](unsigned char device_id, const char *device_name, bool state, unsigned char value)
                                 {
                                     Serial.println("onSetState");
@@ -258,76 +221,19 @@ void fncSetupSoftFauxmoAlexa()
                                     // if (0 == device_id) digitalWrite(RELAY1_PIN, state);
                                     // if (1 == device_id) digitalWrite(RELAY2_PIN, state);
                                     // if (2 == device_id) analogWrite(LED1_PIN, value);
-
+                                    digitalWrite(g_pinIntLedBlue, HIGH);
                                     Serial.printf("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
                                     int8_t relayId = -1;
                                     int8_t relaySwitch = 0;
-                                    if (device_id == 0)
-                                    {
-                                        relayId = 0;
-                                    }
-                                    if (device_id == 1)
-                                    {
-                                        relayId = 1;
-                                    }
-                                    if (device_id == 2)
-                                    {
-                                        relayId = 2;
-                                    }
-                                    if (device_id == 3)
-                                    {
-                                        relayId = 3;
-                                    }
-                                    if (device_id == 4)
-                                    {
-                                        relayId = 4;
-                                    }
-                                    if (device_id == 5)
-                                    {
-                                        relayId = 5;
-                                    }
-                                    if (device_id == 6)
-                                    {
-                                        relayId = 6;
-                                    }
-                                    if (device_id == 7)
-                                    {
-                                        relayId = 7;
-                                    }
 
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay1) == 0))
+                                    for (int i = 0; i < g_RelaysCount; i++)
                                     {
-                                        relayId = 0;
+                                        if ((strcmp(device_name, g_AlexaDeviceNames[i]) == 0))
+                                        {
+                                            relayId = i;
+                                            i = g_RelaysCount;
+                                        }
                                     }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay2) == 0))
-                                    {
-                                        relayId = 1;
-                                    }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay3) == 0))
-                                    {
-                                        relayId = 2;
-                                    }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay4) == 0))
-                                    {
-                                        relayId = 3;
-                                    }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay5) == 0))
-                                    {
-                                        relayId = 4;
-                                    }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay6) == 0))
-                                    {
-                                        relayId = 5;
-                                    }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay7) == 0))
-                                    {
-                                        relayId = 6;
-                                    }
-                                    if ((strcmp(device_name, g_AlexaDeviceName_Relay8) == 0))
-                                    {
-                                        relayId = 7;
-                                    }
-
                                     if (state)
                                     {
                                         relaySwitch = HIGH;
@@ -336,7 +242,7 @@ void fncSetupSoftFauxmoAlexa()
                                     {
                                         relaySwitch = LOW;
                                     }
-                                    if (relayId > 0)
+                                    if (relayId > -1)
                                     {
                                         Serial.printf("Alexa switch relay  #%d (%s) state: %s value: %d\n", relayId, device_name, state ? "ON" : "OFF", value);
                                         if (relaySwitch == HIGH)
@@ -349,12 +255,12 @@ void fncSetupSoftFauxmoAlexa()
                                         };
                                     }
                                     // For the example we are turning the same LED on and off regardless fo the device triggered or the value
-                                    digitalWrite(g_pinIntLedBlue, !state); // we are nor-ing the state because our LED has inverse logic.
+                                    digitalWrite(g_pinIntLedBlue, LOW); // we are nor-ing the state because our LED has inverse logic.
                                 });
     g_NetWebServer.begin();
     g_NetFauxmoAlexa.enable(true);
 }
-void fncSetupSoftMultiCoreTask()
+void fncSetupMultiCoreTask()
 {
     Serial.println("fncSetupMultiCoreTask ");
     xTaskCreatePinnedToCore(
@@ -367,7 +273,15 @@ void fncSetupSoftMultiCoreTask()
         0);                        /* pin task to core 0 */
 
     /* pin task to core 1 */
-    /* pin task to core 1 */
+
+    xTaskCreatePinnedToCore(
+        g_TaskCore_1_LoopRingLed,     /* Task function. */
+        "g_TaskCore_1_HandleRingLed", /* name of task. */
+        10000,                        /* Stack size of task */
+        NULL,                         /* parameter of the task */
+        1,                            /* priority of the task */
+        &g_TaskCore_1_HandleRingLed,  /* Task handle to keep track of created task */
+        1);                           /* pin task to core 1 */
 
     xTaskCreatePinnedToCore(
         g_TaskCore_1_LoopRelays,     /* Task function. */
@@ -387,6 +301,5 @@ void fncSetupSoft()
     fncSetupSoftWifi();
     fncSetupSoftWebSrv();
     fncSetupSoftFauxmoAlexa();
-    fncSetupSoftMultiCoreTask();
 }
 #endif
