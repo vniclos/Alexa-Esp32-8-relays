@@ -48,7 +48,9 @@ Alexa join esp32 and 8 relays modules simultanead with web server
 │   └───web_svg.h                      // web enviroment,  image for more funny web page
 
 ```c
+### root web page
 
+![alt text](images/root.jpg?raw=true)
 ### Config page
 ![alt text](https://github.com/vniclos/Alexa-Esp32-8-relays/blob/main/images/config.jpg?raw=true)
 
