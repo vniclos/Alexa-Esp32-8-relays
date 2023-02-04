@@ -21,7 +21,7 @@ Alexa join esp32 and 8 relays modules simultanead with web server
 
 
 ### project estructure files
-```c
+```cpp
 ├───.pio
 │   ├───build ...
 │   └───libdeps
@@ -47,7 +47,8 @@ Alexa join esp32 and 8 relays modules simultanead with web server
 │   ├───favicon.h                      // web enviroment,  svg used for favicon
 │   └───web_svg.h                      // web enviroment,  image for more funny web page
 
-```c
+```
+
 ### root web page
 
 ![alt text](images/root.jpg?raw=true)
