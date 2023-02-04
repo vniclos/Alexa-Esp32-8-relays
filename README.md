@@ -53,4 +53,3 @@ Alexa join esp32 and 8 relays modules simultanead with web server
 ![alt text](https://github.com/vniclos/Alexa-Esp32-8-relays/blob/main/images/time%20zone.jpg?raw=true)
 
 
-
