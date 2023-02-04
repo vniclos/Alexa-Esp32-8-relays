@@ -19,9 +19,8 @@ Alexa join esp32 and 8 relays modules simultanead with web server
   - some wires
   - look figure
 
-### Compress  project with all his dependences
 
-#### project estructure files
+### project estructure files
 ```c
 ├───.pio
 │   ├───build ...
