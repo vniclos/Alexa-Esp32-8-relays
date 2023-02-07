@@ -57,7 +57,7 @@ There are two areas WiFi and NTP
 
 WiFi is for connect to your Wifi area, it is for do access to Alexa Dot, and access to NTP server for get time, this area need decimal gps location for calculate sunrise and sunset for you location. then you can set programtion of relays on or off on sunshine or sunset.  Note this kit not have real clock, it use time library and NTP server for get date and time.
 
-Remember set summer day light hour if in you country there are summer ajust time
+Remember set your time zone in houres, and summer day light hour if in you country there are summer ajust time
 ![alt text](https://github.com/vniclos/Alexa-Esp32-8-relays/blob/main/images/config.jpg?raw=true)
 
 
