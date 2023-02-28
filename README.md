@@ -51,7 +51,7 @@ Alexa join esp32 and 8 relays modules simultanead with web server
 
 ### root web page
 
-![alt text](images/root.jpg?raw=true)
+![alt text](images/relaysroot.jpg?raw=true)
 ### Config page
 There are two areas WiFi and NTP 
 
