@@ -1,0 +1,70 @@
+#ifndef MAINSETUPALEXA_H
+#define MAINSETUPALEXA_H
+#include "ClsRelay.h"
+#include "mainDefines.h"
+#include <fauxmoESP.h>
+void fncMainSetupAlexa()
+{
+
+  //Serial.println("fncMainSetupAlexa");
+  g_NetFauxmoAlexa.createServer(false);
+  g_NetFauxmoAlexa.setPort(80); // This is required for gen3 devices
+  g_NetFauxmoAlexa.enable(true);
+  for (int i = 0; i < g_RelaysCount; i++)
+  {
+    g_NetFauxmoAlexa.addDevice(g_AlexaDeviceNames[i]);
+    g_NetFauxmoAlexa.setState(g_AlexaDeviceNames[i], false, 128);
+  }
+  g_NetFauxmoAlexa.onSetState([](unsigned char device_id, const char *device_name, bool state, unsigned char value)
+                              {
+                                //Serial.println("onSetState");
+                                // Callback when a command from Alexa is received.
+                                // You can use device_id or device_name to choose the element to perform an action onto (relay, LED,...)
+                                // State is a boolean (ON/OFF) and value a number from 0 to 255 (if you say "set kitchen light to 50%" you will receive a 128 here).
+                                // Just remember not to delay too much here, this is a callback, exit as soon as possible.
+                                // If you have to do something more involved here set a flag and process it in your main loop.
+
+                                // if (0 == device_id) digitalWrite(RELAY1_PIN, state);
+                                // if (1 == device_id) digitalWrite(RELAY2_PIN, state);
+                                // if (2 == device_id) analogWrite(LED1_PIN, value);
+                                digitalWrite(g_pinIntLedBlue, HIGH);
+                                //Serial.printf("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
+                                int8_t relayId = -1;
+                                int8_t relaySwitch = 0;
+
+                                for (int i = 0; i < g_RelaysCount; i++)
+                                {
+                                  if ((strcmp(device_name, g_AlexaDeviceNames[i]) == 0))
+                                  {
+                                    relayId = i;
+                                    i = g_RelaysCount;
+                                  }
+                                }
+                                if (state)
+                                {
+                                  relaySwitch = HIGH;
+                                }
+                                else
+                                {
+                                  relaySwitch = LOW;
+                                }
+                                if (relayId > -1)
+                                {
+                                  //Serial.printf("Alexa switch relay  #%d (%s) state: %s value: %d\n", relayId, device_name, state ? "ON" : "OFF", value);
+                                  if (relaySwitch == HIGH)
+                                  {
+                                    g_Relays[relayId].setProgramationMode_Fixed_ON();
+                                    g_Relays[relayId].setProgramationTime_OnAlways();
+                                  };
+                                  if (relaySwitch == LOW)
+                                  {
+                                    g_Relays[relayId].setProgramationTime_OffAlways();
+                                  };
+                                }
+                                // For the example we are turning the same LED on and off regardless fo the device triggered or the value
+                                digitalWrite(g_pinIntLedBlue, LOW); // we are nor-ing the state because our LED has inverse logic.
+                              });
+  g_NetWebServer.begin();
+  g_NetFauxmoAlexa.enable(true);
+}
+#endif
